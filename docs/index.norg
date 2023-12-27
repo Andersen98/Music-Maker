@@ -1,8 +1,7 @@
-* Playground
-** Music Maker
-   $ Music Maker Project Statement
+* Music Maker
+  $ Music Maker Project Statement
    A simple command line MIDI sequencer and simple synthesis program.
-*** Core Goals
+** Core Goals
    - Should have an ascii art/unicode GUI
    - runs on arm linux and x86_64 linux
    - 16x16 sequencer grid
@@ -10,19 +9,66 @@
    - part select
     - voice edit pane
     - Has a cute animation that dances along
-*** Extra Goals
+** Extra Goals
     - Control external midi devices via usb
     - Implement a User Config with parameters: 
     -- Remap notes and frequencies
     -- Define custom scales
     -- Define custom chord progression
-*** Core Implimentation
-**** PipeWireJack
-     - Should create a PipewireJack instance
-     - Shold stream audio out
-**** Textualize
-     $ Textualize
-     A python package used to develop commandline GUIs.
+** Core Implimentation
+*** PipeWire
+    {*** Pipewire} is a modern audio server and is going to be the simplest to work with from an API standpoint.
+    Support for other servers could be added later
 
-     Uses {Textualize} 
+*** Textualize
+    {*** Textualize} is a python package used to develop commandline GUIs.
+    I'm not 100% set on using textualize. I may opt to find a native C or C++ library for cmdline applications.
 
+** Development Environment
+
+   A challenge with this project is that audio libraries are a pain in the ass.
+   Another challenge with the project is that I want to develop it on and build it for both arm and x86_64. 
+   Thus it is a mini-project just to make sure dev environments are set-up on all my machines.
+
+*** Rasbian Arm
+**** Neovim
+     As of time of writing, Neovim for rasbian is at 0.4.4, wich doesn't support the init.lua. We'll wanna make a custome init.vim then
+
+     @code vimscript
+	let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+	if empty(glob(data_dir . '/autoload/plug.vim'))
+	  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+	  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+	endif
+	     call plug#begin()
+	     Plug 'nvim-neorg/neorg', {do: 'Neorg sync-parsers'} | Plug 'nvim-lua/plenary.nvim'
+	     Plug 'nvim-treesitter/nvim-treesitter', {do: 'TSUpdate'}
+	     Plug 'rebelot/kanagawa.nvim'
+	call plug#end()
+	lua << EOF
+	require('neorg').setup {
+	    load = {
+		["core.defaults"] = {}, -- Loads default behaviour
+		["core.concealer"] = {}, -- Adds pretty icons to your documents
+		["core.dirman"] = { -- Manages Neorg workspaces
+		    config = {
+			workspaces = {
+			    notes = "~/notes",
+			},
+		    },
+		},
+	    },
+	}
+     EOF
+     lua << EOF
+     require("nvim-treesitter.configs").setup({
+	 highlight = { enable = true },
+     })
+     EOF
+	@end
+*** Arch Linux x86_64
+
+    Make sure the following packages are installed 
+    - libpipewire
+
+     
