@@ -1,3 +1,7 @@
+# Pythn venv
+.venv
+
+#
 # Prerequisites
 *.d
 
