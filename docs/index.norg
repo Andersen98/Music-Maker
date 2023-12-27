@@ -66,6 +66,8 @@
      })
      EOF
 	@end
+
+    The above init.vim fails. I think this is because the let-heredoc functionality is also not implimented...
 *** Arch Linux x86_64
 
     Make sure the following packages are installed 
