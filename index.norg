@@ -1,0 +1,28 @@
+* Playground
+** Music Maker
+   $ Music Maker Project Statement
+   A simple command line MIDI sequencer and simple synthesis program.
+*** Core Goals
+   - Should have an ascii art/unicode GUI
+   - runs on arm linux and x86_64 linux
+   - 16x16 sequencer grid
+   - synth voice/drum panel select
+   - part select
+    - voice edit pane
+    - Has a cute animation that dances along
+*** Extra Goals
+    - Control external midi devices via usb
+    - Implement a User Config with parameters: 
+    -- Remap notes and frequencies
+    -- Define custom scales
+    -- Define custom chord progression
+*** Core Implimentation
+**** PipeWireJack
+     - Should create a PipewireJack instance
+     - Shold stream audio out
+**** Textualize
+     $ Textualize
+     A python package used to develop commandline GUIs.
+
+     Uses {Textualize} 
+
