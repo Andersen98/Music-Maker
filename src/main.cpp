@@ -20,20 +20,30 @@ int main(void) {
     button,
     slider,
   });
-
+  
   //Modify the way to render on screen
   auto component = Renderer(layout, [&] {
-          return hbox({
-                  button->Render(),
-                  separator(),
-                  slider->Render() | flex | size(WIDTH, GREATER_THAN, 40),
-                  separator(),
-                  vbox({
-                    text("frequency = " + std::to_string(value)),
+          return vbox({
+                    hbox({
+                      button->Render(),
+                      separator(),
+                      slider->Render() | flex | size(WIDTH, GREATER_THAN, 40),
+                      separator(),
+                      vbox({
+                        text("frequency = " + std::to_string(value)),
+                        separator(),
+                        text("is playing: " + std::to_string(is_playing)),
+                      }) | border,
+                    }) | flex,
                     separator(),
-                    text("is playing: " + std::to_string(is_playing)),
-                  }) | border }) | flex | border;
-          });
+                    hbox({
+                      text("pipewire session ID"),
+                      separator(),
+                      text("pipewire other variable??"),
+                    }),
+                  }) |
+                  border;
+  });
 
   auto screen = ScreenInteractive::FitComponent();
   screen.Loop(component); 

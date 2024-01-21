@@ -92,8 +92,5 @@ target_link_libraries(music-maker
   PRIVATE ftxui::component # Not needed for this example.
 )
 
-# --- Documentation --------------------------------------------------------------
-add_subdirectory(docs)
-# ------------------------------------------------------------------------------
  
 
